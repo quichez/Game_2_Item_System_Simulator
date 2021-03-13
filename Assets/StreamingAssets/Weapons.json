@@ -1,0 +1,47 @@
+[
+    {
+        "id":1001,
+        "title": "Small Dagger",
+        "desc": "A small dagger.",
+        "slug": "small_dagger",
+        "type":"dagger",
+        "rarity": "Common",
+        "damage range": {"min": 1, "max":5}
+    },
+    {
+        "id":1101,
+        "title": "Small Shortsword",
+        "desc": "A small sword.",
+        "slug": "small_shortsword",
+        "type":"sword",
+        "rarity": "Common",
+        "damage range": {"min": 3, "max":7}
+    },
+    {
+        "id":1201,
+        "title": "Practice Wand",
+        "desc": "A wand used by beginners.",
+        "slug": "practice_wand",
+        "type":"wand",
+        "rarity": "Common",
+        "damage range": {"min": 2, "max":4}
+    },
+    {
+        "id":2001,
+        "title": "Sharp Dagger",
+        "desc": "A sharp dagger.",
+        "slug": "sharp_dagger",
+        "type":"dagger",
+        "rarity": "Uncommon",
+        "damage range": {"min": 3, "max":10}
+    },
+    {
+        "id":3001,
+        "title": "Serrated Dagger",
+        "desc": "A dagger with a serrated edge.",
+        "slug": "serrated_dagger",
+        "type":"dagger",
+        "rarity": "Rare",
+        "damage range": {"min": 5, "max":20}
+    }
+]
