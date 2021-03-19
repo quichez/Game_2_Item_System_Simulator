@@ -43,5 +43,35 @@
         "type":"dagger",
         "rarity": "Rare",
         "damage range": {"min": 5, "max":20}
+    },
+    {
+        "id":4001,
+        "title": "Flame Dagger",
+        "desc": "A dagger made out of fire?",
+        "slug": "flame_dagger",
+        "type":"dagger",
+        "rarity": "Legendary",
+        "damage range": {"min": 10, "max":40},
+        "special":{"effect": "BuffSkill", "source": "Fireball", "target": "Fireball", "mult":2, "desc": "Doubles damage of Fireball."}
+    },
+    {
+        "id":4201,
+        "title": "Ornate Ashwood Wand",
+        "desc": "An ashwood wand with intricately carved designs.",
+        "slug": "ornate_ashwood_wand",
+        "type":"wand",
+        "rarity": "Legendary",
+        "damage range": {"min": 20, "max":30},
+        "special":{"effect": "BuffSkillTimed", "source": "Fireball", "target": "Flame", "mult":2, "time": 3, "desc": "Briefly doubles Flame damage after casting Fireball."}
+    },
+    {
+        "id":4202,
+        "title": "Charred Ashwood Wand",
+        "desc": "An ashwood wand charred black and sealed.",
+        "slug": "charred_ashwood_wand",
+        "type":"wand",
+        "rarity": "Legendary",
+        "damage range": {"min": 20, "max":30},
+        "special":{"effect": "BuffStat", "source": "Flame", "target": "defense", "mult":2, "desc": "Doubles defense while channeling Flame."}
     }
 ]

@@ -16,6 +16,14 @@ public class TestItemDisplay : MonoBehaviour
                 foreach(ElementalStat stat in weapon.Stats)
                 {
                     text.text += "\n" + stat.ToString();
+                    
+                }
+                if (weapon.Rarity == Rarity.Legendary)
+                {
+                    foreach (SpecialStat specStat in weapon.SpecialStats)
+                    {
+                        text.text += "\n" + specStat.ToString();
+                    }
                 }
                 break;
             default:
