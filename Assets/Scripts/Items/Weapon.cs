@@ -4,8 +4,7 @@ using UnityEngine;
 using LitJson;
 
 public abstract class Weapon : Equipment
-{
-    public WeaponType Type { get; }
+{    
     public Vector2Int DamageRange { get; private set; }
     public int Damage { get; protected set; }
 
@@ -14,6 +13,7 @@ public abstract class Weapon : Equipment
 
     public Weapon()
     {
+        Type = EquipmentType.Weapon;
         Damage = Random.Range(MinimumDamage, MaximumDamage + 1);
     }  
 

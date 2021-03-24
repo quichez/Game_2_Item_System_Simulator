@@ -1,0 +1,11 @@
+1001: SmallDagger
+1101: SharpDagger
+1201: SerratedDagger
+1301: FlameDagger
+
+2001: SmallShortsword
+2002: RustyBroadsword
+
+3001: Practice Wand
+
+3302: MIST Lightning Rod

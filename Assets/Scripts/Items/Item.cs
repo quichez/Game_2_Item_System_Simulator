@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum Rarity { Common, Uncommon, Rare, Legendary}
-public enum WeaponType { Dagger, Sword, Wand}
+public enum EquipmentType { Weapon, Head, Chest, Pants, Gloves, Boots}
 public enum ArmorType { One, Two, Three}
 
 /*
@@ -37,6 +37,19 @@ public abstract class Item<T> : IItemAdaptor
     public Sprite Icon { get; }
 }
 
+public class EmptyItem : Item<EmptyItem>
+{
+    public override int ID => -1;
+    public override string Title => "";
+    public override string Description => "";
+    public override string Slug => "";
+
+    public EmptyItem()
+    {
+
+    }
+}
+
 public interface IStackable
 {
     bool IsStackable { get; }
@@ -56,6 +69,7 @@ public abstract class Equipment : Item<Equipment>
 {
     //public override 
     public abstract Rarity Rarity { get; }
+    public EquipmentType Type { get; protected set; }
     public List<ElementalStat> Stats = new List<ElementalStat>();
     public List<SpecialStat> SpecialStats = new List<SpecialStat>();
 

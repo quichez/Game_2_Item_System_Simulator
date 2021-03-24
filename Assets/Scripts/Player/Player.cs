@@ -114,6 +114,7 @@ public class SpecialStat
 public class Inventory
 {
     public List<IItemAdaptor> Inv { get; private set; }
+    public List<Equipment> Equipped { get; private set; }
     public Weapon EquippedWeapon { get; private set; }
 
     public Inventory()
