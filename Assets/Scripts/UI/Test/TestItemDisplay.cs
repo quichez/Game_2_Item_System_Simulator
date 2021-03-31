@@ -9,7 +9,7 @@ public class TestItemDisplay : MonoBehaviour
     private string tooltipText;
     private TooltipTrigger tooltipTrigger => GetComponent<TooltipTrigger>();
 
-    public void SetText(IItemAdaptor item)
+    public void SetText(Item item)
     {
         switch (item)
         {

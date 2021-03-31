@@ -7,6 +7,16 @@ public class EquipmentSlot : ItemSlot, IPointerDownHandler, IBeginDragHandler, I
 {
     public EquipmentType SlotType;
 
+    public void SetItem(Equipment equipment)
+    {
+        if(equipment.Type == SlotType || equipment.ID == -1)
+        {
+            Item = equipment;
+            Icon.sprite = equipment.Icon;
+            SetText(equipment);
+        }
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         //do nothing
@@ -34,9 +44,9 @@ public class EquipmentSlot : ItemSlot, IPointerDownHandler, IBeginDragHandler, I
         {
             Icon.GetComponent<CanvasGroup>().blocksRaycasts = false;
             Icon.GetComponent<Canvas>().sortingOrder = 1;
-            if (ItemBeingDragged.transform.parent == startParent)
+            if (ItemBeingDragged.transform.parent == StartParent)
             {
-                ItemBeingDragged.transform.position = startPosition;
+                ItemBeingDragged.transform.position = StartPosition;
             }
         }
     }
@@ -46,7 +56,32 @@ public class EquipmentSlot : ItemSlot, IPointerDownHandler, IBeginDragHandler, I
         if (ItemBeingDragged)
         {
             ItemSlot temp = ItemBeingDragged.transform.parent.GetComponent<ItemSlot>();
-            Debug.Log(temp);
+            switch (temp)
+            {
+                case InventorySlot invSlot:
+                    if(temp.Item is Equipment)
+                    {
+                        if((temp.Item as Equipment).Type == SlotType)
+                        {
+                            Player.Instance.SwapEquipmentItem(this, invSlot);
+                        }
+                    }
+                    invSlot.transform.GetChild(0).position = invSlot.StartPosition;
+                    break;
+                case EquipmentSlot equipSlot:
+                    equipSlot.transform.GetChild(0).position = equipSlot.StartPosition;
+                    break;
+                default:
+                    break;
+            }
+
+            ItemBeingDragged.GetComponent<CanvasGroup>().blocksRaycasts = true;
+            ItemBeingDragged.GetComponent<Canvas>().sortingOrder = 1;
+
+            ItemBeingDragged = null;
         }
+
+        SetText(Item);
     }
+    
 }

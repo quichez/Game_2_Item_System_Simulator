@@ -13,20 +13,24 @@ public class Fireball : AbilityActive
     public override void Process()
     {
         int tempDmg = _dmg + Player.Instance.GetElementalBonuses(Element.Fire);
-        foreach (Equipment item in Player.Instance.Inventory.Inv)
+        foreach (Equipment item in Player.Instance.Inventory.Equipped)
         {
-            var mult = item as IBuffFireballMult;
-            if(mult != null)
+            if (item.ID == -1)
+                continue;
+            if (item is IBuffFireballMult mult)
                 tempDmg *= mult.FireballBuffMult();
         }
-        foreach (Equipment item in Player.Instance.Inventory.Inv)
+        foreach (Equipment item in Player.Instance.Inventory.Equipped)
         {
-            var sum = item as IBuffFireballAdd;
-            if (sum != null)
+            if (item.ID == -1)
+                continue;
+            if (item is IBuffFireballAdd sum)
                 tempDmg += sum.FireballBuffAdd();
         }
-        foreach (Equipment item in Player.Instance.Inventory.Inv)
+        foreach (Equipment item in Player.Instance.Inventory.Equipped)
         {
+            if (item.ID == -1)
+                continue;
             var spec = item as IFireballSpecialEffect;            
             spec?.FireballSpecialEffect();
 

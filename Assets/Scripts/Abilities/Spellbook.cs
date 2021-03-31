@@ -7,7 +7,8 @@ public class Spellbook : MonoBehaviour
 {
     public List<AbilityActive> ActiveAbilities { get; private set; } = new List<AbilityActive>();
     public AbilityActive LastCastAbility { get; private set; }
-    
+
+    private List<Item> playerInv => Player.Instance.Inventory.Inv;
 
     void Start()
     {
@@ -39,5 +40,22 @@ public class Spellbook : MonoBehaviour
         }
         if(Input.GetKeyUp(KeyCode.E))
             ActiveAbilities[2].End();
+
+
+
+        if (Input.GetKeyDown(KeyCode.H))
+        {
+            Item healthPot = playerInv.FindLast(x => x is IHealthPotion);
+            int slot = playerInv.FindLastIndex(x => x == healthPot);
+            if(healthPot is IHealthPotion temp)
+            {
+                temp.UseHealthPotion();
+                if((healthPot as IStackable).Amount == 0)
+                {
+                    playerInv[slot] = new Item();
+                }
+                Player.Instance.OnInventoryUpdateCallback?.Invoke();
+            }
+        }
     }    
 }

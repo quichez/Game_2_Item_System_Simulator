@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using AbilityFactoryReflection;
+using Scima.ResourceSystems;
 
 public enum Element { Air, Water, Fire, Lightning}
 
@@ -10,9 +11,13 @@ public class Player : MonoBehaviour
     public static Player Instance;
     public Inventory Inventory { get; private set; }
     public Spellbook Abilities { get; private set; }
+    public HealthSystem Health { get; private set; }
+    public ManaSystem Mana { get; protected set; }
+
     public GameObject testController;
 
-
+    public delegate void OnPlayerUpdate();
+    public OnPlayerUpdate OnInventoryUpdateCallback;
 
     private void Awake()
     {
@@ -21,24 +26,19 @@ public class Player : MonoBehaviour
         else
             Instance = this;
 
-        Inventory = new Inventory();
+        Inventory = new Inventory(this);
         Abilities = GetComponent<Spellbook>();
-
-        //Test
-        int i = 0;
-        foreach (IItemAdaptor item in Inventory.Inv)
-        {
-            testController.transform.GetChild(i).GetComponent<TestItemDisplay>().SetText(item);
-            i++;
-        }
-        //End Test
+        Health = new HealthSystem(100, 1000, 1, 2.0f);
+        Mana = new ManaSystem(100, 1000, 1, 2.0f);
     }
+
     void Start()
     {
-        
+        //Load Player Data
+
+        OnInventoryUpdateCallback?.Invoke();
     }
 
-    // Update is called once per frame
     void Update()
     {
         
@@ -47,13 +47,29 @@ public class Player : MonoBehaviour
     public int GetElementalBonuses(Element element)
     {
         int bonus = 0;
-        foreach (Equipment item in Instance.Inventory.Inv)
+        foreach (Equipment item in Instance.Inventory.Equipped)
         {
+            if(item.ID == -1)
+            {
+                continue;
+            }
             ElementalStat stat = item.Stats.Find(x => x.Element == element);
             if (stat != null)
                 bonus += stat.Amount;
         }
         return bonus;
+    }
+
+    public void SwapInventoryItems(InventorySlot a, InventorySlot b)
+    {
+        Inventory.SwapInventoryItems(a, b);
+        OnInventoryUpdateCallback?.Invoke();
+    }
+
+    public void SwapEquipmentItem(EquipmentSlot a, InventorySlot b)
+    {
+        Inventory.SwapEquipmentItem(a, b);
+        OnInventoryUpdateCallback?.Invoke();
     }
 }
 
@@ -108,25 +124,5 @@ public class SpecialStat
     public override string ToString()
     {
         return Description;
-    }
-}
-
-public class Inventory
-{
-    public List<IItemAdaptor> Inv { get; private set; }
-    public List<Equipment> Equipped { get; private set; }
-    public Weapon EquippedWeapon { get; private set; }
-
-    public Inventory()
-    {
-        Inv = new List<IItemAdaptor>()
-        {
-            new FlameDagger(), 
-            new OrnateAshwoodWand(),
-            new MistLightningRod(),
-            new RustyBroadsword()
-        };
-
-        EquippedWeapon = (Weapon)Inv[0];
     }
 }

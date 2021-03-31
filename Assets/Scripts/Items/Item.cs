@@ -7,19 +7,21 @@ public enum EquipmentType { Weapon, Head, Chest, Pants, Gloves, Boots}
 public enum ArmorType { One, Two, Three}
 
 /*
- * ID Code: ABCC
+ * ID Code: ABCDD
  * A: Item Type
- * 1: Dagger, 2: Sword, 3: Wand
+ * 1: Weapon, 2: Armor, 3: Consumable
  * 
- * B: Rarity
- * 0: Common, 1: Uncommon:, 2: Rare, 3: Legendary
+ * B: Item SubType (see subclasses)
  * 
- * CC: Item Number
+ * C: Rarity
+ * 0: Common or N/A, 1: Uncommon:, 2: Rare, 3: Legendary
+ * 
+ * DD: Item Number
  * 01-99 ~~ 99 different 
 */
 
 
-public interface IItemAdaptor
+public interface IItem
 {
     int ID { get; }
     string Title { get; }
@@ -28,31 +30,26 @@ public interface IItemAdaptor
     Sprite Icon { get; }
 }
 
-public abstract class Item<T> : IItemAdaptor
+public class Item
 {
-    public abstract int ID { get; }
-    public abstract string Title { get; }
-    public abstract string Description { get; }
-    public abstract string Slug { get; }
-    public Sprite Icon { get; }
-}
+    public virtual int ID { get; protected set; }
+    public virtual string Title { get; protected set; }
+    public virtual string Description { get; protected set; }
+    public virtual string Slug { get; protected set; }
+    public virtual Sprite Icon { get; protected set; }
 
-public class EmptyItem : Item<EmptyItem>
-{
-    public override int ID => -1;
-    public override string Title => "";
-    public override string Description => "";
-    public override string Slug => "";
-
-    public EmptyItem()
+    public Item()
     {
-
+        ID = -1;
     }
 }
 
 public interface IStackable
 {
-    bool IsStackable { get; }
+    int Amount { get; set; }
+    int MaxStack { get; }
+
+    void AddToStack(int amount);    
 }
 
 public interface IConsumable
@@ -65,15 +62,14 @@ public interface IEquippable
     void Equip();
 }
 
-public abstract class Equipment : Item<Equipment>
+public class Equipment : Item
 {
-    //public override 
-    public abstract Rarity Rarity { get; }
-    public EquipmentType Type { get; protected set; }
+    public virtual Rarity Rarity { get; }
+    public virtual EquipmentType Type { get; protected set; }
     public List<ElementalStat> Stats = new List<ElementalStat>();
     public List<SpecialStat> SpecialStats = new List<SpecialStat>();
 
-    public Equipment()
+    public Equipment():base()
     {
         
     }
@@ -126,9 +122,4 @@ public abstract class Equipment : Item<Equipment>
                 break;            
         }
     }
-}
-
-public abstract class Consumable : Item<Consumable>
-{
-    
 }
