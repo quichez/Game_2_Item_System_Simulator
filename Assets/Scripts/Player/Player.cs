@@ -14,7 +14,8 @@ public class Player : MonoBehaviour
     public HealthSystem Health { get; private set; }
     public ManaSystem Mana { get; protected set; }
 
-    public GameObject testController;
+    public Transform WeaponHolder;
+    public Transform HatHolder;
 
     public delegate void OnPlayerUpdate();
     public OnPlayerUpdate OnInventoryUpdateCallback;
@@ -28,15 +29,15 @@ public class Player : MonoBehaviour
 
         Inventory = new Inventory(this);
         Abilities = GetComponent<Spellbook>();
-        Health = new HealthSystem(100, 1000, 1, 2.0f);
-        Mana = new ManaSystem(100, 1000, 1, 2.0f);
+        Health = new HealthSystem(this,100, 1000, 1, 2.0f);
+        Mana = new ManaSystem(this,100, 1000, 1, 2.0f);
     }
 
     void Start()
     {
         //Load Player Data
 
-        OnInventoryUpdateCallback?.Invoke();
+        //OnInventoryUpdateCallback?.Invoke();
     }
 
     void Update()

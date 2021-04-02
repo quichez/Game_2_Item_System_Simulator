@@ -30,7 +30,7 @@ public class TestItemDispenser : MonoBehaviour
                 Player.Instance.Inventory.AddItem(new SerratedDagger());
                 break;
             case 8:
-                Player.Instance.Inventory.AddItem(new SharpDagger());
+                Player.Instance.Inventory.AddItem(new RustyBroadsword());
                 break;
             default:
                 break;

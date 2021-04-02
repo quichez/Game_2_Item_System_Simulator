@@ -5,6 +5,7 @@ using UnityEngine;
 public class OrnateAshwoodWand : Weapon, IFireballSpecialEffect
 {
     public override string Slug => "ornate_ashwood_wand";
+    public override string EquipmentSlug => "WandBase";
     public override Sprite Icon => Resources.Load<Sprite>("Sprites/Weapons/Wands/" + Slug);
     public string SpecialProperty => "Briefly doubles Flame damage after casting Fireball";
     

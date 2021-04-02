@@ -1,0 +1,50 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: WeaponModels
+  m_EditorClassIdentifier: 
+  m_GroupName: WeaponModels
+  m_Data:
+    m_SerializedData: []
+  m_GUID: db17aa9bb16b9a94a9e1831b5e182ac0
+  m_SerializeEntries:
+  - m_GUID: 15cfdb70bfc3dca4db48e1c0b9375480
+    m_Address: WandBase
+    m_ReadOnly: 0
+    m_SerializedLabels:
+    - WeaponWandModel
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 1df85230c05c18f44bc014ae370168b4
+    m_Address: DaggerBase
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: 5cefdd584d3b68146b7dfe3cd0ea2630
+    m_Address: SwordBase
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  - m_GUID: d0bc8b648c7e2ca45895cfacc7294855
+    m_Address: DonutHat
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    m_MainAsset: {fileID: 0}
+    m_TargetAsset: {fileID: 0}
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 90130541bb8a89d49b70361df0ad5903, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 889d740b6a4454b47896e2861cff2c7b, type: 2}
+    - {fileID: 11400000, guid: beee5bdc3e308664c9d09aff39db8efe, type: 2}

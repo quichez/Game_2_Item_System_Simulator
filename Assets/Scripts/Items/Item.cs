@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.ResourceManagement.AsyncOperations;
 
 public enum Rarity { Common, Uncommon, Rare, Legendary}
 public enum EquipmentType { Weapon, Head, Chest, Pants, Gloves, Boots}
@@ -66,12 +68,33 @@ public class Equipment : Item
 {
     public virtual Rarity Rarity { get; }
     public virtual EquipmentType Type { get; protected set; }
+    public virtual string EquipmentSlug { get; protected set; }
     public List<ElementalStat> Stats = new List<ElementalStat>();
     public List<SpecialStat> SpecialStats = new List<SpecialStat>();
+    public GameObject Model;
 
     public Equipment():base()
     {
-        
+        //Addressables.LoadAssetAsync<GameObject>("WandBase").Completed += OnModelLoadComplete;
+    }
+
+    private void OnModelLoadComplete(AsyncOperationHandle<GameObject> obj)
+    {
+        if(obj.Result == null)
+        {
+            return;
+        }
+        Model = obj.Result;
+    }
+
+    public void GetEquipmentModel(Transform t)
+    {
+        if (string.IsNullOrEmpty(EquipmentSlug))
+        {
+            Debug.Log(GetType().ToString() + " needs an EquipmentSlug!");
+            return;
+        }
+        Addressables.InstantiateAsync(EquipmentSlug,t);
     }
 
     protected void SetStatBonuses(Rarity rarity)

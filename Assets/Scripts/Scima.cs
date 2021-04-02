@@ -21,7 +21,7 @@ namespace Scima
             protected float _regenTimer;
             protected bool _IsRegenerating;
 
-            public ResourceSystem(int curr, int max, int amt, float regenTimer)
+            public ResourceSystem(MonoBehaviour entity, int curr, int max, int amt, float regenTimer)
             {
                 Current = curr;
                 Maximum = max;
@@ -31,7 +31,9 @@ namespace Scima
                 _timer = 0;
             }     
 
-            protected void ChangeCurrent(int amt) => Current = Mathf.Clamp(Current + amt, 0, Maximum);        
+            protected void ChangeCurrent(int amt) => Current = Mathf.Clamp(Current + amt, 0, Maximum);
+
+            public string GetCurrentOverMaximum() => Current.ToString() + " / " + Maximum.ToString();
         }
 
         public class HealthSystem : ResourceSystem
@@ -39,9 +41,9 @@ namespace Scima
             public onResourceUpgrade OnHealthUpdateCallback;
             public onResourceUpgrade OnHealthDepletedCallback;
 
-            public HealthSystem(int curr, int max, int amt, float regenTimer): base(curr, max, amt, regenTimer)
+            public HealthSystem(MonoBehaviour entity, int curr, int max, int amt, float regenTimer): base(entity, curr, max, amt, regenTimer)
             {
-
+                entity.StartCoroutine(RegenerateHealth(regenTimer));
             }
 
             public void Heal(int amt)
@@ -99,7 +101,7 @@ namespace Scima
             public onResourceUpgrade OnManaUpdateCallback;
             public onResourceUpgrade OnManaDepletedCallback;
 
-            public ManaSystem(int curr, int max, int amt, float regenTimer) : base(curr, max, amt, regenTimer)
+            public ManaSystem(MonoBehaviour entity, int curr, int max, int amt, float regenTimer) : base(entity, curr, max, amt, regenTimer)
             {
 
             }

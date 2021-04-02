@@ -5,6 +5,7 @@ using UnityEngine;
 public class RustyBroadsword : Weapon
 {
     public override string Slug => "rusty_broadsword";
+    public override string EquipmentSlug => "SwordBase";
     public override Sprite Icon => Resources.Load<Sprite>("Sprites/Weapons/Swords/" + Slug);
 
     public override Rarity Rarity => Rarity.Common;

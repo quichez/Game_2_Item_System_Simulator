@@ -8,6 +8,8 @@ public class MistLightningRod : Weapon, ILegendaryEquipment
     public override string Title => "MIST Lightning Rod";
     public override string Description => "One of the lightning rods from a building in MIST.";
     public override string Slug => "mist_lr";
+    public override string EquipmentSlug => "WandBase";
+
     public override Sprite Icon => Resources.Load<Sprite>("Sprites/Weapons/Wands/" + Slug);
 
     public string SpecialProperty => "Increases consecutive bonus to Lightning Bolt";

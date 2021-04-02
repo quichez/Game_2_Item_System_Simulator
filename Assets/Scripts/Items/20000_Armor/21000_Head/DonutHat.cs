@@ -8,6 +8,7 @@ public class DonutHat : Armor, ILegendaryEquipment
     public override string Title => "Donut Hat";
     public override string Description => "A donut hat!";
     public override string Slug => "donut_hat";
+    public override string EquipmentSlug => "DonutHat";
     public override Sprite Icon => Resources.Load<Sprite>("Sprites/Armor/Head/" + Slug);
 
     public override EquipmentType Type => EquipmentType.Head;

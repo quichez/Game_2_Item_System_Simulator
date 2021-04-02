@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 public class TestInventoryController : MonoBehaviour
 {
@@ -12,7 +13,7 @@ public class TestInventoryController : MonoBehaviour
 
     private void Start()
     {
-        Player.Instance.OnInventoryUpdateCallback += UpdateInventory;
+        //Player.Instance.OnInventoryUpdateCallback += UpdateInventory;
     }
 
     private void UpdateInventory()
@@ -24,6 +25,24 @@ public class TestInventoryController : MonoBehaviour
                 _equipSlots[i].SetItem(Player.Instance.Inventory.Equipped[i]);
             }
             _invSlots[i].SetItem(Player.Instance.Inventory.Inv[i]);            
+        }
+
+        if(Player.Instance.WeaponHolder.childCount > 0)
+        {
+            Destroy(Player.Instance.WeaponHolder.GetChild(0).gameObject);
+        }
+        if (Player.Instance.HatHolder.childCount > 0)
+        {
+            Destroy(Player.Instance.HatHolder.GetChild(0).gameObject);
+        }
+
+        if (_equipSlots[0].Item.ID != -1)
+        {
+            (_equipSlots[0].Item as Equipment).GetEquipmentModel(Player.Instance.WeaponHolder);
+        }
+        if (_equipSlots[1].Item.ID != -1)
+        {
+            (_equipSlots[1].Item as Equipment).GetEquipmentModel(Player.Instance.HatHolder);
         }
     }
 

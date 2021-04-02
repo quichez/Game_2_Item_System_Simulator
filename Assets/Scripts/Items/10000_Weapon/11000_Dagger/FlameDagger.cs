@@ -6,6 +6,7 @@ using UnityEngine;
 public class FlameDagger : Weapon, IBuffFireballMult, ILegendaryEquipment
 {
     public override string Slug => "flame_dagger";
+    public override string EquipmentSlug => "DaggerBase";
     public string SpecialProperty => "Doubles base Fireball damage";
     
     public override Rarity Rarity => Rarity.Legendary;

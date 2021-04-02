@@ -6,6 +6,7 @@ public class SerratedDagger : Weapon
 {
 
     public override Rarity Rarity => Rarity.Rare;
+    public override string EquipmentSlug => "WandBase";
 
     public override int MinimumDamage => 10;
     public override int MaximumDamage => 15;

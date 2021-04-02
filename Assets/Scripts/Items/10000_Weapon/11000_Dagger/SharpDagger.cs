@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SharpDagger : Weapon
 {
+    public override string EquipmentSlug => "WandBase";
+
     public override Rarity Rarity => Rarity.Uncommon;
     public override int MinimumDamage => 5;
     public override int MaximumDamage => 10;
